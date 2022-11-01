@@ -1,13 +1,27 @@
-import { Injectable } from "@decorators/di";
-import console from "console";
+import { Injectable, Inject } from "@decorators/di";
+import { DbContext } from "../data-layer/DbContext";
 
 @Injectable()
 export class BaseService {
-  constructor() {}
+  constructor(@Inject(DbContext) private dbContext: DbContext) {}
 
-  get() {
-    return {
-      message: "Hello world",
-    };
+  async getAll() {
+    return await this.dbContext.todo.find().exec();
+  }
+
+  async getById(id: string) {
+    return await this.dbContext.todo.findById(id).exec();
+  }
+
+  async markAsDone(id: string) {
+    await this.dbContext.todo
+      .findByIdAndUpdate(id, {
+        done: true,
+      })
+      .exec();
+  }
+
+  async createTodo(dto: { text: string }) {
+    await this.dbContext.todo.create(dto);
   }
 }

@@ -4,6 +4,7 @@ import { BaseRequestSchema } from "../../../business-logic/requests/BaseRequestS
 import { validateRequest } from "../../../business-logic/utils/validateRequestProcessor";
 
 import { instanceToPlain } from "class-transformer";
+import { TodoRequestSchema } from "../../../business-logic/requests/TodoRequestSchema";
 
 import {
   Response,
@@ -19,35 +20,42 @@ export class BaseController {
   constructor(@Inject(BaseService) private baseService: BaseService) {}
 
   @Get("/")
-  getData(@Response() res: any) {
-    res.send(this.baseService.get());
+  async getData(@Response() res: any) {
+    const data = await this.baseService.getAll();
+    res.status(200).send(data);
   }
 
   @Get("/:id")
-  getOneData(@Response() res: any, @Params("id") id: string) {
-    console.log(id);
-    res.send(this.baseService.get());
+  async getOneData(@Response() res: any, @Params("id") id: string) {
+    res.status(200).send(await this.baseService.getById(id));
   }
 
   @Post("/")
-  async postData(@Response() res: any, @Body() body: BaseRequestSchema) {
+  async postData(@Response() res: any, @Body() body: TodoRequestSchema) {
+    console.log(body);
     let validationErrors: any[] = await validateRequest(
-      BaseRequestSchema,
+      TodoRequestSchema,
       body
     );
 
     if (validationErrors.length > 0) {
-      res.send(
-        {
-          throw: true,
-          status: 406,
-          message: "Incorrect input",
-          data: validationErrors,
-        },
-        400
-      );
+      res.status(400).send({
+        message: "Incorrect input",
+        data: validationErrors,
+      });
     }
 
-    return res.send(body);
+    await this.baseService.createTodo(body);
+    res.status(201).send({
+      message: "Success",
+    });
+  }
+
+  @Get("/:id/done")
+  async markTaskAsDone(@Response() res: any, @Params("id") id: string) {
+    await this.baseService.markAsDone(id);
+    res.status(200).send({
+      message: "Success",
+    });
   }
 }

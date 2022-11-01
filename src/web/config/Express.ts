@@ -2,21 +2,22 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
-import { attachControllers } from "@decorators/express";
-import * as path from "path";
-// import { DbContext } from "@data-layer/DbContext";
-import { BaseController } from "./controllers/";
 
-import { Hijack } from "express-multi-hijack";
+import * as path from "path";
+import { DbContext } from "@data-layer/DbContext";
+import { BaseController } from "./controllers/";
+import { attachControllers } from "@decorators/express";
+import { Container } from "@decorators/di";
 
 const health = require("express-ping");
 
 export class ExpressConfig {
   app: express.Express;
   router: express.Router;
-  //   dbContext: DbContext;
+  dbContext: DbContext;
   constructor() {
-    // this.dbContext = Container.get(DbContext);
+    this.dbContext = Container.get<DbContext>(DbContext);
+    this.connectDB();
     this.app = express();
     this.router = express.Router();
     this.app.use(cors());
@@ -33,9 +34,9 @@ export class ExpressConfig {
     attachControllers(this.router, [BaseController]);
   }
 
-  //   async connectDB() {
-  //     await this.dbContext.connect();
-  //   }
+  async connectDB() {
+    await this.dbContext.connect();
+  }
 
   unmatchedRoutesHandlder(req: any, res: any) {
     res.json({
