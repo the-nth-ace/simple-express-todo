@@ -32,7 +32,6 @@ export class BaseController {
 
   @Post("/")
   async postData(@Response() res: any, @Body() body: TodoRequestSchema) {
-    console.log(body);
     let validationErrors: any[] = await validateRequest(
       TodoRequestSchema,
       body
