@@ -5,6 +5,7 @@ import helmet from "helmet";
 
 import * as path from "path";
 import { DbContext } from "@data-layer/DbContext";
+import { BaseService } from "@business-logic/BaseService";
 import { BaseController } from "./controllers/";
 import { attachControllers } from "@decorators/express";
 import { Container } from "@decorators/di";

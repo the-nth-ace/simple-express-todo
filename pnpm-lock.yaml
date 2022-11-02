@@ -35,6 +35,7 @@ specifiers:
   multer: 1.4.5-lts.1
   prettier: ^2.7.1
   reflect-metadata: ^0.1.13
+  resolve-tspaths: ^0.8.3
   ts-jest: ^29.0.3
   ts-node-dev: ^2.0.0
   tsconfig-paths: ^4.1.0
@@ -77,6 +78,7 @@ devDependencies:
   eslint: 8.26.0
   jest: 29.2.2_@types+node@18.11.7
   prettier: 2.7.1
+  resolve-tspaths: 0.8.3_typescript@4.8.4
   ts-jest: 29.0.3_r7gdwuj75x2gz25bauak3xcnbm
   ts-node-dev: 2.0.0_evej5wzm4hojmu6uzxwpspdmsu
   tsconfig-paths: 4.1.0
@@ -1950,6 +1952,11 @@ packages:
       uri-js: 4.4.1
     dev: true
 
+  /ansi-colors/4.1.3:
+    resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
+    engines: {node: '>=6'}
+    dev: true
+
   /ansi-escapes/4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
     engines: {node: '>=8'}
@@ -2348,6 +2355,11 @@ packages:
     resolution: {integrity: sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==}
     hasBin: true
     dev: false
+
+  /commander/9.4.1:
+    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: true
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -4361,6 +4373,18 @@ packages:
   /resolve-from/5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
+    dev: true
+
+  /resolve-tspaths/0.8.3_typescript@4.8.4:
+    resolution: {integrity: sha512-91Qc0+Ta7teMjjqW0DOmeCkcx54QAkS1TcEwwMnnjg2g7BCRxM+2lutWnEPBtzVMcHtc+hRNy2O+zmOfREV0dg==}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=3.0.3'
+    dependencies:
+      ansi-colors: 4.1.3
+      commander: 9.4.1
+      fast-glob: 3.2.12
+      typescript: 4.8.4
     dev: true
 
   /resolve.exports/1.1.0:
