@@ -7,6 +7,7 @@ export class DbContext {
   private _db: typeof mongoose;
 
   public async connect(): Promise<void> {
+    console.log("DB_URIL should be", process.env.DB_URI);
     try {
       this._db = await mongoose.connect(process.env.DB_URI);
       console.log("MONGODB is eating good");
