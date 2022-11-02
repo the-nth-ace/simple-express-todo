@@ -6,7 +6,7 @@ export class Application {
 
   constructor() {
     this.express = new ExpressConfig();
-    const port = process.env.PORT;
+    const port = process.env.PORT || 4000;
 
     this.server = this.express.app.listen(port, () => {
       console.clear();
